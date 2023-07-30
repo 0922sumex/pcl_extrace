@@ -9,11 +9,12 @@
 
 //调参
 int MAX_ITERATION_PLANE = 1;//提取的平面个数
-int minPointNum = 4000;  //圆柱聚类的最少内点个数
-float PlaneThresold = 0.035; //平面的内点距离阈值
-float CylinderThresold = 0.07;  //圆柱的内点距离阈值
-float DownSampleLeafSize =0.009f;    //下采样的体素网格大小
-bool If_OutFilter = false;//判断是否下采样
+int minPointNum = 3500;  //圆柱聚类的最少内点个数
+float PlaneThresold = 0.05; //平面的内点距离阈值
+float CylinderThresold = 0.02;  //圆柱的内点距离阈值
+float DownSampleLeafSize =0.02f;    //下采样的体素网格大小
+bool If_OutFilter =true;//判断是否下采样
+
 int
 main(int argc, char** argv)
 {

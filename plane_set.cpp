@@ -16,7 +16,6 @@ pcl::ExtractIndices<pcl::PointXYZ> extract_cylinder;//平面提取器
 pcl::ExtractIndices<pcl::Normal> extract_normals;    ///点法线特征　提取对象
 pcl::PointCloud<pcl::Normal>::Ptr cloud_normals2(new pcl::PointCloud<pcl::Normal>);//法线特征
 pcl::ModelCoefficients::Ptr cofficient_plane(new pcl::ModelCoefficients);//模型系数
-//pcl::ModelCoefficients::Ptr cofficient_cylinder(new pcl::ModelCoefficients);//模型系数
 Eigen::VectorXf cofficient_cylinder;//圆柱模型系数
 
 pcl::PointCloud<pcl::Normal>::Ptr cloud_normals(new pcl::PointCloud<pcl::Normal>);
@@ -25,7 +24,6 @@ pcl::search::KdTree<pcl::PointXYZ>::Ptr tree(new pcl::search::KdTree<pcl::PointX
 
 void normals_estimate(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_filtered)
 {
-	// Estimate point normals
 	ne.setSearchMethod(tree);
 	ne.setInputCloud(cloud_filtered);
 	ne.setKSearch(50);
@@ -85,7 +83,7 @@ cylinder_set::Extrace_cylinder(int minPointNum, float CylinderThresold)
 		pcl::SampleConsensusModelCylinder< pcl::PointXYZ, pcl::Normal >::Ptr
 			model(new pcl::SampleConsensusModelCylinder< pcl::PointXYZ, pcl::Normal >(cloud_plane_in, indices));		//创建圆柱模型
 		model->setInputNormals(cloud_normals);
-		model->setRadiusLimits(0.1, 3000);		//这里设置圆柱半径大小的范围
+		model->setRadiusLimits(0.1, 1000);		//这里设置圆柱半径大小的范围
 
 		pcl::RandomSampleConsensus<pcl::PointXYZ> ransac(model);
 		ransac.setDistanceThreshold(CylinderThresold);//圆柱面内点大小
@@ -125,7 +123,7 @@ cylinder_set::Extrace_cylinder(int minPointNum, float CylinderThresold)
 		cylinderset.push_back(cylinder_);//加入圆柱集合
 		cylinder_number++;//圆柱个数数加一
 		cylinder_segment->clear();
-		cout << "圆柱系数" << endl;
+		cout << "圆柱系数：";
 		for (int j = 0; j<cofficient_cylinder.size(); j++) {
 			cout << cofficient_cylinder(j)<<" ";
 		}

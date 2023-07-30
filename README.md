@@ -20,17 +20,17 @@ CylinderSet_S类似
 
 1.scan1.pcd
 
-下采样：20.0f, 20.0f, 20.0f（下采样后1w）
+下采样DownSampleLeafSize：20.0f, 20.0f, 20.0f（下采样后1w）
 
-平面个数：1（需自己手动控制）
+平面个数MAX_ITERATION_PLANE：1（需自己手动控制）
 
-平面阈值：40
+平面阈值PlaneThresold：40
 
-圆柱最少聚类点个数：600
+圆柱最少聚类点个数minPointNum：600
 
-圆柱阈值：14（13-16均可 14效果最好）
+圆柱阈值CylinderThresold：14（13-16均可 14效果最好）
 
-不去离群点（If_OutFilter==false）
+不去离群点（If_OutFilter==false）若加上去离群点需要重新调参
 
 ![](E:\v5\lab\图片\scan1.png)
 
@@ -54,18 +54,20 @@ CylinderSet_S类似
 
 需要用到去离群点的函数（下采样后5w）
 
-下采样：0.02f,0.02f,0.02f
+下采样DownSampleLeafSize=0.02f（0.009f噪点少了很多 但是数据量有28w）
 
-去离群点：
+是否需要去离群点： If_OutFilter =true
 
-平面个数：1
+平面个数 MAX_ITERATION_PLANE：1
 
-平面阈值：0.05
+平面阈值PlaneThresold：0.05
 
-圆柱最少聚类点个数：4000
+圆柱最少聚类点个数 minPointNum：3500
 
-圆柱阈值：0.02
+圆柱阈值CylinderThresold：0.02
 
-圆柱半径大小：0，1000
+
 
 ![1690655339760](C:\Users\xia\AppData\Roaming\Typora\typora-user-images\1690655339760.png)
+
+![1690706390168](C:\Users\xia\AppData\Roaming\Typora\typora-user-images\1690706390168.png)
